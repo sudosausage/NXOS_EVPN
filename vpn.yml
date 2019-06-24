@@ -1,0 +1,18 @@
+set policy-options policy-statement {{Cust}}-export term {{Cust}} then community set {{Cust}}
+set policy-options policy-statement {{Cust}}-export term {{Cust}} then accept
+set policy-options policy-statement {{Cust}}-export then reject
+set policy-options policy-statement {{Cust}}-import term {{Cust}} from community {{Cust}}
+set policy-options policy-statement {{Cust}}-import term {{Cust}} then accept
+set policy-options policy-statement {{Cust}}-import then reject
+
+set routing-instances {{Cust}} instance-type vrf
+set routing-instances {{Cust}} interface lo0.{{RD}}
+set routing-instances {{Cust}} route-distinguisher 13213:{{RD}}
+set routing-instances {{Cust}} vrf-import {{Cust}}-import
+set routing-instances {{Cust}} vrf-export {{Cust}}-export
+set routing-instances {{Cust}} vrf-table-label
+set routing-instances {{Cust}} routing-options auto-export
+
+set policy-options community {{Cust}} members target:13213:{{RD}}
+
+set interfaces lo0 unit {{RD}} family inet address 172.1.1.1/32

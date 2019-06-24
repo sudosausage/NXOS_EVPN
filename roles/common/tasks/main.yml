@@ -1,0 +1,6 @@
+---
+- name: Building and applying Interface configuration
+  template:
+    src: intefaces.j2
+    dest: /home/admin/Ansible/testing/render/{{ inventory hostname }}.conf
+t

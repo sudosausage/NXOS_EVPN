@@ -1,0 +1,6 @@
+{% set device = hostvars[inventory_hostname] %}
+
+feature bgp
+feature bfd
+!
+hostname {{ device.name }}

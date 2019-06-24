@@ -1,0 +1,8 @@
+{% set device = hostvars[inventory_hostname] %}
+
+{% for ifd, interface in device.interfaces.items() %}
+interface {{ ifd }}
+  ip address {{ interface.ipv4 }}/{{ interface.mask }}
+  description {{ interface.description }}
+!
+{% endfor %}

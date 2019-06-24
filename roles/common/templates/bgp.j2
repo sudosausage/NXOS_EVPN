@@ -1,0 +1,18 @@
+{% set device = hostvars[inventory_hostname] %}
+
+router bgp {{ device.asn }}
+  router-id  {{ device.interfaces.loopback0.ipv4 }}
+  address-family ipv4 unicast
+    soft-reconfiguration inbound
+    {% for networks in device.bgp_networks.items() %}
+    network {{ networks }}
+    {% endfor %}
+  {% for nbr, neighbor in device.bgp_neighbor.items() %}
+  neighbor {{ nbr }} remote-as {{ neighbor.remote_asn }}
+    description {{ neighbor.description }}
+    {% if neighbor.bfd == "True" %}
+    bfd fast-detect
+    bfd multiplier 3
+    bfd minimum-interval 300
+    {% endif %}
+  {% endfor %}
