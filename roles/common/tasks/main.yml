@@ -8,5 +8,5 @@
 #  hosts: nxos
 #  tasks:
 #    - nxos_config:
-#        provider: "{{ creds_core_ssh }}"
+#        provider: "{{ nxos_provider }}"
 #        src: "./config_files/{{ inventory_hostname }}.txt"
