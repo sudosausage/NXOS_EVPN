@@ -2,7 +2,7 @@
 name: "Spine-1"
 role: "Spine"
 
-#Transport Mechanism CLI for the moment will change to the API in futer
+#Transport Mechanism CLI for the moment will change to the API in future
 nxos_provider:
   username: "{{ ansible_user }}"
   password: "{{ ansible_password }}"
