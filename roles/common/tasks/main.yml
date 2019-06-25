@@ -4,21 +4,7 @@
     src: interfaces.j2
     dest: "./config_files/{{ inventory_hostname }}.conf"
 
-#- name: Push NX-OS configs
-#  hosts: nxos
-#  tasks:
-#    - nxos_config:
-#        provider: "{{ nxos_provider }}"
-#        src: "./config_files/{{ inventory_hostname }}.conf"
-
-- name: Generate full configs for Arista
-  hosts: nxos
-  tasks:
-    - name: NAPALM push configs to devices
-      napalm_install_config:
-        provider: "{{ nxos_provider }}"
-        config_file: "./config_files/{{ inventory_hostname }}.conf"
-        commit_changes: False
-        replace_config: True
-        diff_file: "DIFFS/{{ inventory_hostname }}.txt"
-      tags: push_cfgs
+- name: Push NX-OS configs
+  nxos_config:
+  provider: "{{ nxos_provider }}"
+  src: "./config_files/{{ inventory_hostname }}.conf"
