@@ -1,0 +1,7 @@
+[all:vars]
+ansible_user=ansible
+ansible_password=ansible
+
+[nxos]
+Spine-1 ansible_host=10.10.99.10
+Spine-2 ansible_host=10.10.99.11

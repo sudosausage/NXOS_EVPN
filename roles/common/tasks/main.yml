@@ -2,5 +2,11 @@
 - name: Building and applying Interface configuration
   template:
     src: intefaces.j2
-    dest: /home/admin/Ansible/testing/render/{{ inventory hostname }}.conf
-t
+    dest: ./config_files/{{ inventory hostname }}.conf
+
+#- name: Push NX-OS configs
+#  hosts: nxos
+#  tasks:
+#    - nxos_config:
+#        provider: "{{ creds_core_ssh }}"
+#        src: "./config_files/{{ inventory_hostname }}.txt"

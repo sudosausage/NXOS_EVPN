@@ -1,0 +1,5 @@
+---
+- name: Templating Structure with Ansible Roles.
+  hosts: nxos
+  roles:
+    - common
