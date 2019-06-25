@@ -3,7 +3,7 @@
 {% for ifd, interface in device.interfaces.items() %}
 interface {{ ifd }}
   {% if interface.type is defined %}
-    no switchport
+  no switchport
   {% endif %}
   ip address {{ interface.ipv4 }}/{{ interface.ipv4_mask }}
   description {{ interface.description }}
