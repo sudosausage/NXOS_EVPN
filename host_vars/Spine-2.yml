@@ -15,18 +15,22 @@ interfaces:
     ipv4: "10.0.1.2"
     ipv4_mask: 31
     description: "Link to Leaf-2"
+    type: "routed"
   ethernet1/2:
     ipv4: "10.0.1.0"
     ipv4_mask: 31
     description: "Link to Leaf-1"
+    type: "routed"
   ethernet1/3:
     ipv4: "10.0.1.6"
     ipv4_mask: 31
     description: "Link to Leaf-4"
+    type: "routed"
   ethernet1/4:
     ipv4: "10.0.1.4"
     ipv4_mask: 31
     description: "Link to Leaf-3"
+    type: "routed"
   loopback0:
     ipv4: "100.127.1.2"
     ipv4_mask: 32
