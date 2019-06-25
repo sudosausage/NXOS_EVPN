@@ -6,5 +6,5 @@
 
 - name: Push NX-OS configs
   nxos_config:
-  provider: "{{ nxos_provider }}"
-  src: "./config_files/{{ inventory_hostname }}.conf"
+    provider: "{{ nxos_provider }}"
+    src: "./config_files/{{ inventory_hostname }}.conf"
