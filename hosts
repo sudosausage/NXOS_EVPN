@@ -1,6 +1,7 @@
 [all:vars]
 ansible_user=ansible
 ansible_password=ansible
+ansible_connection=local
 
 [nxos]
 Spine-1 ansible_host=10.10.99.10

@@ -2,7 +2,7 @@
 
 {% for ifd, interface in device.interfaces.items() %}
 interface {{ ifd }}
-  ip address {{ interface.ipv4 }}/{{ interface.mask }}
+  ip address {{ interface.ipv4 }}/{{ interface.ipv4_mask }}
   description {{ interface.description }}
 !
 {% endfor %}
