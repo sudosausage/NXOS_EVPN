@@ -1,0 +1,42 @@
+---
+name: "Leaf-1"
+role: "Leaf"
+
+#Transport Mechanism CLI for the moment will change to the API in future
+nxos_provider:
+  username: "{{ ansible_user }}"
+  password: "{{ ansible_password }}"
+  transport: cli
+  host: "{{ ansible_host }}"
+
+#Interface Section
+interfaces:
+  ethernet1/1:
+    ipv4: "10.0.0.1"
+    ipv4_mask: 31
+    description: "Link to Spine-1"
+    type: "routed"
+  ethernet1/2:
+    ipv4: "10.0.1.1"
+    ipv4_mask: 31
+    description: "Link to Spine-2"
+    type: "routed"
+  loopback0:
+    ipv4: "100.127.10.1"
+    ipv4_mask: 32
+    description: "Router ID"
+
+#BGP Section
+asn: 64520
+bgp_networks:
+  - "100.127.10.1/32"
+bgp_neighbor:
+  10.0.0.0:
+    local_address: "10.0.0.1"
+    remote_asn: "64512"
+    description: "eBGP to Spine-1"
+    bfd: "True"
+  10.0.1.0:
+    local_address: "10.0.1.1"
+    remote_asn: "64513"
+    description: "eBGP to Spine-2"
