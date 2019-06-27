@@ -7,5 +7,6 @@ interface {{ ifd }}
 {% endif %}
   ip address {{ interface.ipv4 }}/{{ interface.ipv4_mask }}
   description {{ interface.description }}
+  no shutdown
 !
 {% endfor %}
