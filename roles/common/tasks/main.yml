@@ -1,10 +1,20 @@
 ---
-- name: Building and applying Interface configuration
+- name: Templating Interface Config
   template:
     src: interfaces.j2
-    dest: "./config_files/{{ inventory_hostname }}.conf"
+    dest: "./config_files/interface_config/{{ inventory_hostname }}.conf"
 
-- name: Push NX-OS configs
+- name: Pushing Interface Config
   nxos_config:
     provider: "{{ nxos_provider }}"
-    src: "./config_files/{{ inventory_hostname }}.conf"
+    src: "./config_files/interface_config/{{ inventory_hostname }}.conf"
+
+- name: Templating BGP Underlay Config
+  template:
+    src: bgp.j2
+    dest: "./config_files/bgp_underlay_config/{{ inventory_hostname }}.conf"
+
+- name: Pushing BGP Underlay Config
+  nxos_config:
+    provider: "{{ nxos_provider }}"
+    src: "./config_files/bgp_underlay_config/{{ inventory_hostname }}.conf"
