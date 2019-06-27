@@ -5,7 +5,7 @@ feature bfd
 router bgp {{ device.asn }}
   router-id {{ device.interfaces.loopback0.ipv4 }}
   address-family ipv4 unicast
-  maximum-paths 4
+    maximum-paths 4
 {% for networks in device.bgp_networks %}
     network {{ networks }}
 {% endfor %}
