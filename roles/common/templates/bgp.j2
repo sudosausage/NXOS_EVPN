@@ -4,7 +4,7 @@ router bgp {{ device.asn }}
   router-id  {{ device.interfaces.loopback0.ipv4 }}
   address-family ipv4 unicast
     soft-reconfiguration inbound
-    {% for networks in device.bgp_networks.items() %}
+    {% for networks in device.bgp_networks() %}
     network {{ networks }}
     {% endfor %}
   {% for nbr, neighbor in device.bgp_neighbor.items() %}
