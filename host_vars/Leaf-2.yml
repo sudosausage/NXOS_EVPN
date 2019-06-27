@@ -32,7 +32,7 @@ bgp_networks:
   - "100.127.10.2/32"
 bgp_neighbor:
   10.0.0.2:
-    local_address: "10.0.0.1"
+    local_address: "10.0.0.3"
     remote_asn: "64512"
     description: "eBGP to Spine-1"
   10.0.1.2:
