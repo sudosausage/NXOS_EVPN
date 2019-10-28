@@ -1,6 +1,7 @@
 ---
 - name: nxos module
   hosts: nxos
+  gather_facts: no
   vars:
     ssh:
       host: "{{ ansible_host }}"
@@ -12,7 +13,7 @@
          nxos_user:
            provider: "{{ ssh }}"
            name: ansible
-           state: present
+           state: absent
            roles: network-admin
            configured_password: ansible
            update_password: on_create
