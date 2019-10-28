@@ -11,7 +11,7 @@
       tasks:
          nxos_user:
            provider: "{{ ssh }}"
-           - name: ansible
+           name: ansible
            state: present
            roles: network-admin
            configured_password: ansible
