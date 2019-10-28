@@ -9,8 +9,8 @@
       transport: cli
 
       tasks:
-        provider: "{{ ssh }}"
          nxos_user:
+           provider: "{{ ssh }}"
            - name: ansible
            state: present
            roles: network-admin
