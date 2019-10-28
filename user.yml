@@ -1,0 +1,13 @@
+---
+- name: nxos module
+  hosts: nxos
+  vars:
+    ssh:
+      host: "{{ ansible_host }}"
+      username: admin
+      password: Night$hade900
+      transport: cli
+
+- nxos_config:
+  lines:
+    - username ansible password ansible role network-admin
