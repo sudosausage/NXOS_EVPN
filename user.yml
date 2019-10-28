@@ -8,9 +8,11 @@
       password: Night$hade900
       transport: cli
 
-  tasks:
-  - name: New User
-      provider: "{{ ssh }}"
-      nxos_config:
-        lines:
-          - username ansible password ansible role network-admin
+      tasks:
+        provider: "{{ ssh }}"
+         nxos_user:
+           - name: ansible
+           state: present
+           roles: network-admin
+           configured_password: ansible
+           update_password: on_create
