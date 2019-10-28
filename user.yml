@@ -1,19 +1,22 @@
 ---
 - name: nxos module
-  hosts: nxos
-  gather_facts: no
+  hosts: all
+  gather_facts: falce
+  connection: local
+
   vars:
     ssh:
       host: "{{ ansible_host }}"
-      username: admin
-      password: Night$hade900
+      username: <input UN>
+      password: <input PW>
       transport: cli
 
-      tasks:
-         nxos_user:
-           provider: "{{ ssh }}"
-           name: ansible
-           state: absent
-           roles: network-admin
-           configured_password: ansible
-           update_password: on_create
+  tasks:
+    - name: New User Creation
+      nxos_user:
+        provider: "{{ ssh }}"
+        name: ansible
+        state: present
+        roles: network-admin
+        configured_password: ansible
+        update_password: on_create
