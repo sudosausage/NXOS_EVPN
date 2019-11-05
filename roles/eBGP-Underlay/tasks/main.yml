@@ -1,0 +1,10 @@
+---
+- name: Templating BGP Underlay Config
+  template:
+    src: bgp.j2
+    dest: "./config_files/bgp_underlay_config/{{ inventory_hostname }}.conf"
+
+- name: Pushing BGP Underlay Config
+  nxos_config:
+    provider: "{{ nxos_provider }}"
+    src: "./config_files/bgp_underlay_config/{{ inventory_hostname }}.conf"
