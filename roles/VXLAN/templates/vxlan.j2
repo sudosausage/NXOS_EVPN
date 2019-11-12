@@ -1,0 +1,45 @@
+{% set device = hostvars[inventory_hostname] %}
+
+{% for vni, vxlan in device.vni.items() %}
+vlan {{ vxlan.vlan }}
+  vn-segment {{ vxlan.vnid }}
+{% endfor %}
+
+{% for vni, vxlan in device.vni.items() %}
+{% if vxlan.type is defined and 'L2' in vxlan.type %}
+evpn
+  vni {{ vxlan.vnid }} l2
+    rd {{ vxlan.rd }}
+    route-target import {{ vxlan.rd }}
+    route-target export {{ vxlan.rd }}
+{% endif %}
+{% endfor %}
+
+{% for vni, vxlan in device.l3_vni.items() %}
+vrf context {{ vxlan.vrf }}
+  vni {{ vxlan.vnid }}
+  rd {{ vxlan.rd }}
+  address-family ipv4 unicast
+    route-target both {{ vxlan.rd }}
+    route-target both {{ vxlan.rd }} evpn
+{% endfor %}
+
+router bgp {{ device.asn }}
+{% for vni, vxlan in device.l3_vni.items() %}
+  vrf {{ vxlan.vrf }}
+  address-family ipv4 unicast
+    advertise l2vpn evpn
+{% endfor %}
+
+interface nve1
+{% for vni, vxlan in device.l3_vni.items() %}
+  member vni {{ vxlan.vnid }} associate-vrf
+{% endfor %}
+
+{% for vni, vxlan in device.l3_vni.items() %}
+interface {{ vxlan.vlan }}
+  no shutdown
+  mtu 9216
+  vrf member {{ vxlan.vlan }}
+  ip forward
+{% endfor %}

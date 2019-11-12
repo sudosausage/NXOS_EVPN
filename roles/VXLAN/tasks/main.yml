@@ -1,0 +1,5 @@
+---
+- name: Templating VXLAN Config
+  template:
+    src: bgp.j2
+    dest: "./config_files/VXLAN_config/{{ inventory_hostname }}.conf"
