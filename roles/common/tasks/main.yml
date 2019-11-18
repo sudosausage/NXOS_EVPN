@@ -1,10 +1,10 @@
 ---
-- name: Templating Interface Config
+- name: Templating Base Config
   template:
     src: base_conf.j2
     dest: "./config_files/Base_config/{{ inventory_hostname }}.conf"
 
-- name: Pushing Interface Config
+- name: Pushing Base Config
   nxos_config:
     provider: "{{ nxos_provider }}"
     src: "./config_files/Base_config/{{ inventory_hostname }}.conf"
