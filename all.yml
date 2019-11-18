@@ -5,5 +5,5 @@
   roles:
     - common
     - Interfaces
-    - eBGP_Underlay
+    - eBGP-Underlay
     - VXLAN
