@@ -6,40 +6,50 @@ vlan {{ vxlan.vlan }}
 {% endfor %}
 
 {% for vni, vxlan in device.vni.items() %}
-{% if vxlan.type is defined and 'L2' in vxlan.type %}
-evpn
-  vni {{ vxlan.vnid }} l2
-    rd {{ vxlan.rd }}
-    route-target import {{ vxlan.rd }}
-    route-target export {{ vxlan.rd }}
+{% if device.role is defined and 'Leaf' in device.role %}
+    {% if vxlan.type is defined and 'L2' in vxlan.type %}
+    evpn
+      vni {{ vxlan.vnid }} l2
+        rd {{ vxlan.rd }}
+        route-target import {{ vxlan.rd }}
+        route-target export {{ vxlan.rd }}
+    {% endif %}
 {% endif %}
 {% endfor %}
 
 {% for vni, vxlan in device.l3_vni.items() %}
+{% if device.role is defined and 'Leaf' in device.role %}
 vrf context {{ vxlan.vrf }}
   vni {{ vxlan.vnid }}
   rd {{ vxlan.rd }}
   address-family ipv4 unicast
     route-target both {{ vxlan.rd }}
     route-target both {{ vxlan.rd }} evpn
+{% endif %}
 {% endfor %}
 
 router bgp {{ device.asn }}
 {% for vni, vxlan in device.l3_vni.items() %}
+{% if device.role is defined and 'Leaf' in device.role %}
   vrf {{ vxlan.vrf }}
   address-family ipv4 unicast
     advertise l2vpn evpn
+{% endif %}
 {% endfor %}
 
 interface nve1
 {% for vni, vxlan in device.l3_vni.items() %}
+{% if device.role is defined and 'Leaf' in device.role %}
   member vni {{ vxlan.vnid }} associate-vrf
+{% endif %}
 {% endfor %}
 
 {% for vni, vxlan in device.l3_vni.items() %}
+{% if device.role is defined and 'Leaf' in device.role %}
 interface {{ vxlan.vlan }}
   no shutdown
   mtu 9216
   vrf member {{ vxlan.vrf }}
   ip forward
+{% endif %}  
 {% endfor %}
