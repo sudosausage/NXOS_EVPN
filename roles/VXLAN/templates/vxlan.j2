@@ -8,11 +8,11 @@ vlan {{ vxlan.vlan }}
 {% for vni, vxlan in device.vni.items() %}
 {% if device.role is defined and 'Leaf' in device.role %}
     {% if vxlan.type is defined and 'L2' in vxlan.type %}
-        evpn
-          vni {{ vxlan.vnid }} l2
-            rd {{ vxlan.rd }}
-            route-target import {{ vxlan.rd }}
-            route-target export {{ vxlan.rd }}
+evpn
+  vni {{ vxlan.vnid }} l2
+    rd {{ vxlan.rd }}
+    route-target import {{ vxlan.rd }}
+    route-target export {{ vxlan.rd }}
     {% endif %}
 {% endif %}
 {% endfor %}
