@@ -40,6 +40,6 @@ interface nve1
 interface {{ vxlan.vlan }}
   no shutdown
   mtu 9216
-  vrf member {{ vxlan.vlan }}
+  vrf member {{ vxlan.vrf }}
   ip forward
 {% endfor %}
