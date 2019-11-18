@@ -44,7 +44,7 @@ bgp_neighbor:
 #VXLAN Section
 vxlan_role: "Leaf"
 vni:
-  10001:
+  1001:
     vnid: "1001"
     type: "L2"
     rd: "2012:1001"
@@ -64,4 +64,4 @@ l3_vni:
     vnid: "3001"
     vlan: 3001
     vrf: "Cust-A"
-    rd: "2012:5001"
+    rd: "2012:3001"
