@@ -1,4 +1,5 @@
 {% set device = hostvars[inventory_hostname] %}
+#jinja2: lstrip_blocks: “True”
 
 {% for vni, vxlan in device.vni.items() %}
 vlan {{ vxlan.vlan }}
