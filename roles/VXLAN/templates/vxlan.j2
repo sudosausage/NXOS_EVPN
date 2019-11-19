@@ -1,5 +1,5 @@
 {% set device = hostvars[inventory_hostname] %}
-jinja2: lstrip_blocks: “True”
+#jinja2: lstrip_blocks: “True”
 
 {% for vni, vxlan in device.vni.items() %}
 vlan {{ vxlan.vlan }}
@@ -7,13 +7,13 @@ vlan {{ vxlan.vlan }}
 {% endfor %}
 
 {% for vni, vxlan in device.vni.items() %}
-{% if device.role is defined and 'Leaf' in device.role %}
-  {% if vxlan.type is defined and 'L2' in vxlan.type %}
-  evpn
-    vni {{ vxlan.vnid }} l2
-      rd {{ vxlan.rd }}
-      route-target import {{ vxlan.rd }}
-      route-target export {{ vxlan.rd }}
+  {% if device.role is defined and 'Leaf' in device.role %}
+    {% if vxlan.type is defined and 'L2' in vxlan.type %}
+evpn
+  vni {{ vxlan.vnid }} l2
+    rd {{ vxlan.rd }}
+    route-target import {{ vxlan.rd }}
+    route-target export {{ vxlan.rd }}
     {% endif %}
 {% endif %}
 {% endfor %}
