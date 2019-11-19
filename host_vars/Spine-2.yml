@@ -58,3 +58,6 @@ bgp_neighbor:
     local_address: "10.0.1.6"
     remote_asn: "64523"
     description: "eBGP to Leaf-4"
+
+#VXLAN Section
+vxlan_role: "Spine"    

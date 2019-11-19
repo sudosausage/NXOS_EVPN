@@ -39,3 +39,28 @@ bgp_neighbor:
     local_address: "10.0.1.5"
     remote_asn: "64513"
     description: "eBGP to Spine-2"
+
+#VXLAN Section
+vxlan_role: "Leaf"
+vni:
+  1001:
+    vnid: "1001"
+    type: "L2"
+    rd: "2012:1001"
+    vrf: "Cust-A"
+    vlan: 10
+    ipv4_gw: "10.10.10.1"
+    ipv4_mask: 24
+    agw_mac: "0200.0000.1001"
+    intf:
+      ethernet1/10:
+        type: "access"
+      ethernet:1/11:
+        type: "trunk"
+
+l3_vni:
+  3001:
+    vnid: "3001"
+    vlan: 3001
+    vrf: "Cust-A"
+    rd: "2012:3001"
