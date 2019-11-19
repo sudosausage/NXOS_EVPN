@@ -42,6 +42,7 @@ bgp_neighbor:
 
 #VXLAN Section
 vxlan_role: "Leaf"
+transport: "evpn"
 vni:
   1001:
     vnid: "1001"
