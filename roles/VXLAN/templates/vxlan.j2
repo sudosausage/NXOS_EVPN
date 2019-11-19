@@ -14,8 +14,8 @@ evpn
     rd {{ vxlan.rd }}
     route-target import {{ vxlan.rd }}
     route-target export {{ vxlan.rd }}
-    {% endif -%}
-  {% endif %}
+    {% endif %}
+  {%- endif %}
 {% endfor %}
 
 {% for vni, vxlan in device.l3_vni.items() %}
