@@ -6,7 +6,7 @@ vlan {{ vxlan.vlan }}
   vn-segment {{ vxlan.vnid }}
 {% endfor %}
 
-{% for vni, vxlan in device.vni.items() %}
+{% for vni, vxlan in device.vni.items() -%}
   {% if device.role is defined and 'Leaf' in device.role %}
     {% if vxlan.type is defined and 'L2' in vxlan.type -%}
 evpn
@@ -16,7 +16,7 @@ evpn
     route-target export {{ vxlan.rd }}
     {% endif %}
   {%- endif %}
-{% endfor %}
+{%- endfor %}
 
 {% for vni, vxlan in device.l3_vni.items() %}
 {% if device.role is defined and 'Leaf' in device.role %}
