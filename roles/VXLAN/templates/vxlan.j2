@@ -6,17 +6,17 @@ vlan {{ vxlan.vlan }}
   vn-segment {{ vxlan.vnid }}
 {% endfor %}
 
-{% for vni, vxlan in device.vni.items() %}
-  {% if device.role is defined and 'Leaf' in device.role %}
+{% if device.role is defined and 'Leaf' in device.role %}
+    {% for vni, vxlan in device.vni.items() %}
     {%- if vxlan.type is defined and 'L2' in vxlan.type -%}
-{{ device.transport }}
-  vni {{ vxlan.vnid }} l2
-    rd {{ vxlan.rd }}
-    route-target import {{ vxlan.rd }}
-    route-target export {{ vxlan.rd }}
+    {{ device.transport }}
+      vni {{ vxlan.vnid }} l2
+        rd {{ vxlan.rd }}
+        route-target import {{ vxlan.rd }}
+        route-target export {{ vxlan.rd }}
     {% endif %}
-  {% endif %}
-{% endfor %}
+    {% endfor %}
+{% endif %}
 
 {% for vni, vxlan in device.l3_vni.items() %}
 {% if device.role is defined and 'Leaf' in device.role %}
