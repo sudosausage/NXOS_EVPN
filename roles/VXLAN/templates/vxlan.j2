@@ -52,3 +52,12 @@ interface {{ vxlan.vlan }}
   ip forward
 {% endif %}
 {% endfor %}
+
+router bgp {{ device.asn }}
+{% for vni, vxlan in device.l3_vni.items() %}
+{% if device.role is defined and 'Leaf' in device.role %}
+  vrf {{ vxlan.vrf }}
+  address-family ipv4 unicast
+    advertise l2vpn evpn
+{% endif %}
+{% endfor %}
