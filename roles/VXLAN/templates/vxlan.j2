@@ -9,7 +9,7 @@ vlan {{ vxlan.vlan }}
 {% if device.role is defined and 'Leaf' in device.role %}
     {% for vni, vxlan in device.vni.items() %}
     {%- if vxlan.type is defined and 'L2' in vxlan.type -%}
-    {{ device.transport }}
+{{ device.transport }}
       vni {{ vxlan.vnid }} l2
         rd {{ vxlan.rd }}
         route-target import {{ vxlan.rd }}
