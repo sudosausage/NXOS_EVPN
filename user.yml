@@ -1,7 +1,7 @@
 ---
 - name: nxos module
   hosts: all
-  gather_facts: falce
+  gather_facts: false
   connection: local
 
   vars:
