@@ -4,8 +4,8 @@
 interface {{ ifd }}
 {% if interface.type is defined and 'routed' in interface.type %}
   no switchport
-{% endif %}
   ip address {{ interface.ipv4 }}/{{ interface.ipv4_mask }}
+{% endif %}
   description {{ interface.description }}
   no shutdown
 !
