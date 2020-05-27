@@ -47,7 +47,6 @@ transport: "evpn"
 vni:
   1001:
     vnid: "1001"
-    type: "L2"
     rd: "2012:1001"
     vrf: "Cust-A"
     vlan: 10
